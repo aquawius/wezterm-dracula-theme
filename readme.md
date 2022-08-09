@@ -8,12 +8,11 @@
 git clone https://gitee.com/aquawius/wezterm-config.git
 ```
 
-2. 将拷贝的文件放在 `C:/Users/用户名/.config/`下
+2. 将拷贝的文件放在 `C:/Users/用户名/.config/`下(没有`.config`文件夹则创建`.config`文件夹)
 
 > ##### 完整文件结构应该这样
 >
 > ``` powershell
-> 
 > C:\USERS
 > ├─Public
 > ├─QU(你的用户名)
@@ -32,11 +31,15 @@ git clone https://gitee.com/aquawius/wezterm-config.git
 > │  │        ...
 > ```
 
+~~当然你可以直接进入`C:/Users/用户名/.config/`然后`git clone`~~
+
 3. 完成!
+
+##### 欢迎提PR或Issue
 
 ### 后记
 
-> ##### 关于终端
+> ###### 关于终端
 >
 > > 这里默认使用的终端是`powershell 7`,你可以更改为任意类型的终端,比如`cmd.exe`, `powershell 5(powershell.exe)`, `powershell 7(pwsh.exe)`
 > >
@@ -47,12 +50,17 @@ git clone https://gitee.com/aquawius/wezterm-config.git
 >
 > > 原本是我自己写的配置,用的自带的Sukura配色加上自己写的tab栏, 现在的配置文件改为使用[dracula官方提供的配色](https://github.com/dracula/wezterm.git)
 > >
-> > 原来的
+> > **原来的**
 > >
 > > ![img](readme.assets/2283725-20220726143424695-1970924268.png)
 > >
-> > dracula官方提供的配色
+> > Dracula**官方提供的配色**
 > >
 > > ![image-20220810020054548](readme.assets/image-20220810020054548.png)
 > >
-> > 怎么说,还是Dracula好看!  Dracula yyds!
+> > 怎么说,还是Dracula好看!  **Dracula yyds!**
+>
+> ###### 关于配置文件
+>
+> > 实话的说,我是从一个github的用户Ctrl-CV来的,名字已经忘记了,中间也被我改了一些东西,在此感谢那位不知名的github大佬,也要感谢wezterm带来了如此丰富的自定义终端!
+
