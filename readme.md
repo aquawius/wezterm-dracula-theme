@@ -35,6 +35,8 @@ git clone https://gitee.com/aquawius/wezterm-config.git
 
 3. 完成!
 
+> 提示: 使用鼠标中键点击tab,可以关闭该tab
+
 ##### 欢迎提PR或Issue
 
 ### 后记
