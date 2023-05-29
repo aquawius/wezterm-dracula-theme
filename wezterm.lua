@@ -36,6 +36,7 @@ local config = {
 
     -- font = wezterm.font(''),
     font = wezterm.font_with_fallback({
+        "CaskaydiaCove Nerd Font",      -- add Cascadia Code Nerd Font
         "Cascadia Code",
         "Fira Code",
     }),
