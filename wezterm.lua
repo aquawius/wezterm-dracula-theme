@@ -39,7 +39,7 @@ local config = {
         "Cascadia Code",
         "Fira Code",
     }),
-    font_size = 12.0,
+    font_size = 15.0,
 
     default_prog = { 'pwsh' },
     -- default_cwd = "/some/path",
