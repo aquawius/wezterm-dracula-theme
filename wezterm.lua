@@ -25,7 +25,6 @@ local config = {
     enable_scroll_bar = true,
     exit_behavior = "Close",
 
-    -- tab_bar_at_bottom = true,
     inactive_pane_hsb = {
         hue = 1.0,
         saturation = 1.0,
@@ -42,47 +41,6 @@ local config = {
 
     -- leader = { key = "b", mods = "CTRL" },
     set_environment_variables = {},
-
-    -- Tab bar appearance
-    -- colors = {
-    --     tab_bar = {
-
-    --         -- The color of the strip that goes along the top of the window
-    --         background = "#282828",
-
-    --         -- The active tab is the one that has focus in the window
-    --         active_tab = {
-    --             -- The color of the background area for the tab
-    --             bg_color = "#18131e",
-    --             -- The color of the text for the tab
-    --             fg_color = "#ff65fd",
-
-    --             intensity = "Normal",
-    --             underline = "None",
-    --             italic = false,
-    --             strikethrough = false,
-    --         },
-
-    --         -- Inactive tabs are the tabs that do not have focus
-    --         inactive_tab = {
-    --             bg_color = "#282828",
-    --             fg_color = "#d19afc",
-    --         },
-    --         inactive_tab_hover = {
-    --             bg_color = "#202020",
-    --             fg_color = "#ff65fd",
-    --         },
-
-    --         new_tab = {
-    --             bg_color = "#282828",
-    --             fg_color = "#d19afc",
-    --         },
-    --         new_tab_hover = {
-    --             bg_color = "#18131e",
-    --             fg_color = "#ff65fd",
-    --         },
-    --     },
-    -- },
 
     -- set default theme to dracula official conf
     colors = dracula,
@@ -120,21 +78,25 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     })
 
     table.insert(config.launch_menu, {
-        label = "VS PowerShell 2022",
-        args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devps 17.0"}
+        label = "Default WSL Command Prompt",
+        args = {"wsl"}
     })
-    table.insert(config.launch_menu, {
-        label = "VS PowerShell 2019",
-        args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devps 16.0"}
-    })
-    table.insert(config.launch_menu, {
-        label = "VS Command Prompt 2022",
-        args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devcmd 17.0"}
-    })
-    table.insert(config.launch_menu, {
-        label = "VS Command Prompt 2019",
-        args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devcmd 16.0"}
-    })
+    -- table.insert(config.launch_menu, {
+    --     label = "VS PowerShell 2022",
+    --     args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devps 17.0"}
+    -- })
+    -- table.insert(config.launch_menu, {
+    --     label = "VS PowerShell 2019",
+    --     args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devps 16.0"}
+    -- })
+    -- table.insert(config.launch_menu, {
+    --     label = "VS Command Prompt 2022",
+    --     args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devcmd 17.0"}
+    -- })
+    -- table.insert(config.launch_menu, {
+    --     label = "VS Command Prompt 2019",
+    --     args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devcmd 16.0"}
+    -- })
 
     -- Enumerate any WSL distributions that are installed and add those to the menu
     local success, wsl_list, wsl_err = wezterm.run_child_process({"wsl", "-l"})
@@ -146,9 +108,12 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     for idx, line in ipairs(wezterm.split_by_newlines(wsl_list)) do
         -- Skip the first line of output; it's just a header
         if idx > 1 then
-            -- Remove the "(Default)" marker from the default line to arrive
-            -- at the distribution name on its own
-            local distro = line:gsub(" %(Default%)", "")
+            -- Remove the "(Default)" marker from the default line to arrive at the distribution name on its own
+
+            -- For English Users, the default line:
+            -- local distro = line:gsub(" %(Default%)", "")
+            -- For Chinese User,
+            local distro = line:gsub(" %(默认%)", "")
 
             -- Add an entry that will spawn into the distro with the default shell
             table.insert(config.launch_menu, {
@@ -166,6 +131,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
         end
     end
 else
+    -- Not a windows environment
     table.insert(config.launch_menu, {
         label = "zsh",
         args = {"zsh", "-l"}
