@@ -1,17 +1,20 @@
 -- Wezterm configuration
 -- powered by aquawius
--- this is version 4
+-- this is version 6
 -- version 1: initial config
 -- version 2: wsl support
 -- version 3: update theme to purple style
 -- version 4: fix bug "git log" with "terminal is not fully functional"
 --            tracert: term set to "" is not a compatible term for git
--- version 5: update theme to dracula official
+-- version 5: update theme to dracula official.
+-- version 6: add feature: open hyperlinks on pressing ctrl key and mouse_left key.
+
 local wezterm = require("wezterm");
 local dracula = require('dracula');
 
 local config = {
     check_for_updates = true,
+    -- Here are wezterm default color scheme, which is good.
     -- color_scheme = "Fahrenheit",
     -- color_scheme = "Gruvbox Dark",
     -- color_scheme = "Blue Matrix",
@@ -28,7 +31,7 @@ local config = {
     inactive_pane_hsb = {
         hue = 1.0,
         saturation = 1.0,
-        brightness = 1.0
+        brightness = 1.0,
     },
 
     -- font = wezterm.font(''),
@@ -39,13 +42,48 @@ local config = {
     -- default_cwd = "/some/path",
     launch_menu = {},
 
+    -- if you want to use leader key, you should set operations on trig.
     -- leader = { key = "b", mods = "CTRL" },
     set_environment_variables = {},
 
     -- set default theme to dracula official conf
     colors = dracula,
     tab_bar_at_bottom = true,
-    use_fancy_tab_bar = false
+    use_fancy_tab_bar = false,
+
+    -- enable feature on open hyperlinks on press ctrl key
+    mouse_bindings = { -- Change the default click behavior so that it only selects
+    -- text and doesn't open hyperlinks
+    {
+        event = {
+            Up = {
+                streak = 1,
+                button = "Left"
+            }
+        },
+        mods = "NONE",
+        action = wezterm.action.CompleteSelection("PrimarySelection")
+    }, -- and make CTRL-Click open hyperlinks
+    {
+        event = {
+            Up = {
+                streak = 1,
+                button = "Left"
+            }
+        },
+        mods = "CTRL",
+        action = wezterm.action.OpenLinkAtMouseCursor
+    }, -- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
+    {
+        event = {
+            Down = {
+                streak = 1,
+                button = 'Left'
+            }
+        },
+        mods = 'CTRL',
+        action = wezterm.action.Nop
+    }}
 }
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
@@ -81,6 +119,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
         label = "Default WSL Command Prompt",
         args = {"wsl"}
     })
+
     -- table.insert(config.launch_menu, {
     --     label = "VS PowerShell 2022",
     --     args = {"powershell", "-NoLogo", "-NoExit", "-Command", "devps 17.0"}
@@ -133,11 +172,17 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 else
     -- Not a windows environment
     table.insert(config.launch_menu, {
+        label = "fish",
+        args = {"fish", "-l"} -- "-l" for login shell 
+    })
+
+    table.insert(config.launch_menu, {
         label = "zsh",
         args = {"zsh", "-l"}
     })
 end
 
+-- get the current run programs for display on tab bar
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
 -- Given "c:\\foo\\bar" returns "bar"
