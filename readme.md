@@ -1,68 +1,137 @@
-## 这是一个我自己的wezterm配置文件
+## My own [wezterm](https://wezfurlong.org/wezterm/index.html) configuration file
 
-### 使用方法
+> Yet another [wezterm](https://wezfurlong.org/wezterm/index.html) configuration file based on [dracula](https://draculatheme.com/) color scheme, adding some useful features.
 
-1. 将本仓库拷贝
+![gif](./readme.assets/feature_preview.gif)
 
-``` powershell
-git clone https://gitee.com/aquawius/wezterm-config.git
-```
+#### [这里是中文介绍(Chinese Introduction)](./readmd_zh.md)
 
-2. 将拷贝的文件放在 `C:/Users/用户名/.config/`下(没有`.config`文件夹则创建`.config`文件夹)
+---
 
-> ##### 完整文件结构应该这样
+### ✅ Features
+
+- [x]   Dracula color scheme.
+- [x]   Nice looking bottom bar.
+- [x]   Supports quick startup of various environments. (Need adjust config file)
+
+### :art: Some Screenshot
+
+![Screenshot1](./readme.assets/PixPin_2024-03-20_17-07-36.png)
+
+![Screenshot2](./readme.assets/PixPin_2024-03-20_17-08-35.png)
+
+
+
+### 🔨 Get started
+
+1. ##### turn to your `homedir/.config/` folder.
+
+    ```shell
+    cd C:/Users/ `username` /.config/
+    ```
+
+    > (create '.config' folder if there is no '.config' folder)
+
+2. ##### clone the repository.
+
+  ```shell
+  git clone https://github.com/aquawius/wezterm-config.git
+  ```
+
+3. ##### rename `wezterm-config` to `wezterm`.
+
+  ```shell
+  C:\USERS
+  ├─Public
+  ├─QU(Your home directory)
+  │  ├─Documents
+  │  ├─Downloads
+  │  ├─Pictures
+  │  ├─.config
+  │  │  ├─git
+  │  │  └─wezterm	(rename wezterm-config to wezterm)
+  │  │     └─.git
+  │  │     dracula.lua
+  │  │     readme.md
+  │  │     wezterm.lua
+  │  │        ...
+  ```
+
+4. ##### Done
+
+Issue and PR is welcomed. :smile:
+
+---
+
+##### :pushpin: ​How to Use
+
+You can find an `+` on the bottom of the terminal.
+> Left click `+` to create a default terminal. (pwsh.exe)
 >
-> ``` powershell
-> C:\USERS
-> ├─Public
-> ├─QU(你的用户名)
-> │  ├─Documents
-> │  ├─Downloads
-> │  ├─Music
-> │  ├─Pictures
-> │  ├─Videos
-> │  ├─.config
-> │  │  ├─git
-> │  │  └─wezterm
-> │  │     └─.git   (delete it)
-> │  │     dracula.lua
-> │  │     readme.md
-> │  │     wezterm.lua
-> │  │        ...
-> ```
-
-~~当然你可以直接进入`C:/Users/用户名/.config/`然后`git clone`~~
-
-3. 完成!
-
-> 提示: 使用鼠标中键点击tab,可以关闭该tab
-
-##### 欢迎提PR或Issue
-
-### 后记
-
-> ###### 关于终端
+> Right click `+` to select, you should enter a list of all your terminals
 >
-> > 这里默认使用的终端是`powershell 7`,你可以更改为任意类型的终端,比如`cmd.exe`, `powershell 5(powershell.exe)`, `powershell 7(pwsh.exe)`
-> >
-> > 修改方式是在`./config/wezterm/wezterm.lua`中找到
-> > `default_prog = { 'pwsh' },` 将`{ }`中的`'pwsh'`改为你想要的终端 (绝对路径或者环境变量都可以)
+> ![right_click_to_open_list](./readme.assets/right_click_list.gif)
 >
-> ###### 主题配色
+> Middle click selected tab to close this tab. 
 >
-> > 原本是我自己写的配置,用的自带的Sukura配色加上自己写的tab栏, 现在的配置文件改为使用[dracula官方提供的配色](https://github.com/dracula/wezterm.git)
-> >
-> > **原来的**
-> >
-> > ![img](readme.assets/2283725-20220726143424695-1970924268.png)
-> >
-> > Dracula**官方提供的配色**
-> >
-> > ![image-20220810020054548](readme.assets/image-20220810020054548.png)
-> >
-> > 怎么说,还是Dracula好看!  **Dracula yyds!**
->
-> ###### 关于配置文件
->
-> > 实话的说,我是从一个github的用户Ctrl-CV来的,名字已经忘记了,中间也被我改了一些东西,在此感谢那位不知名的github大佬,也要感谢wezterm带来了如此丰富的自定义终端!
+> ![middle_click_to_close_tab](./readme.assets/middleclick_toclose.gif)
 
+---
+
+##### :speech_balloon: The thing you should know
+
+1. The default font of config is [CascadiaCode nerd font](https://www.programmingfonts.org/#cascadia-code), you can download it this link: https://www.nerdfonts.com/font-downloads.
+
+2. The default shell is `powershell7` (pwsh.exe), on Linux is `fish`. If you haven't these shells (or do not use these shells), you can disable them on comment the following lines:
+
+    > Change default shell:
+    >
+    > ```lua
+    > default_prog = {'pwsh'},
+    > ```
+
+    > Change shells list:
+    >
+    > ```lua
+    >    table.insert(config.launch_menu, {
+    >         label = "Command Prompt",
+    >         args = {"cmd.exe"}
+    >     })
+    >     table.insert(config.launch_menu, {
+    >         label = "PowerShell 5",
+    >         args = {"powershell.exe", "-NoLogo"}
+    >     })
+    >     table.insert(config.launch_menu, {
+    >         label = "PowerShell 7",
+    >         args = {"pwsh.exe", "-NoLogo"}
+    >     })
+    > 
+    >     table.insert(config.launch_menu, {
+    >         label = "Anaconda PowerShell Prompt",
+    >         args = {"pwsh", "-NoLogo", "-NoExit", "-ExecutionPolicy", "Bypass", "-Command",
+    >                 "& 'C:\\ProgramData\\anaconda3\\shell\\condabin\\conda-hook.ps1' ; conda activate 'C:\\ProgramData\\anaconda3' "}
+    >     })
+    > 
+    >     table.insert(config.launch_menu, {
+    >         label = "VS Command Prompt 2022 (PowerShell 7)",
+    >         args = {"pwsh", "-NoLogo", "-NoExit", "-ExecutionPolicy", "Bypass", "-NoProfile", "-Command",
+    >                 " & 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\Tools\\Launch-VsDevShell.ps1'"}
+    >     })
+    > 
+    >     table.insert(config.launch_menu, {
+    >         label = "Default WSL Command Prompt",
+    >         args = {"wsl"}
+    >     })
+    > ```
+
+3. For Chinese/English user, if you want to get launch_menu correctly (especially wsl distributions), you should  uncomment the following line:
+  ```shell
+              -- For English Users, the default line:
+              -- local distro = line:gsub(" %(Default%)", "")
+              -- For Chinese User,
+              local distro = line:gsub(" %(默认%)", "")
+  ```
+
+**You can change all the stuff on change configuration.** (If you have time to read [Wezterm document](https://wezfurlong.org/wezterm).)
+
+> There's no License on this repo, do all the stuff you want to do, please show all your imagination to improve it.
