@@ -4,8 +4,6 @@
 
 ![gif](./readme.assets/feature_preview.gif)
 
-#### [这里是中文介绍(Chinese Introduction)](./readmd_zh.md)
-
 ---
 
 ### ✅ Features
@@ -35,10 +33,10 @@
 2. ##### clone the repository.
 
   ```shell
-  git clone https://github.com/aquawius/wezterm-config.git
+  git clone https://github.com/aquawius/wezterm-dracula-theme.git
   ```
 
-3. ##### rename `wezterm-config` to `wezterm`.
+3. ##### rename `wezterm-dracula-theme` to `wezterm`.
 
   ```shell
   C:\USERS
@@ -49,7 +47,7 @@
   │  ├─Pictures
   │  ├─.config
   │  │  ├─git
-  │  │  └─wezterm	(rename wezterm-config to wezterm)
+  │  │  └─wezterm	(rename wezterm-dracula-theme to wezterm)
   │  │     └─.git
   │  │     dracula.lua
   │  │     readme.md

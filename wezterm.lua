@@ -8,6 +8,8 @@
 --            tracert: term set to "" is not a compatible term for git
 -- version 5: update theme to dracula official.
 -- version 6: add feature: open hyperlinks on pressing ctrl key and mouse_left key.
+-- version 7: because `Cascadia Code` official Nerd Font released, `CaskaydiaCove Nerd Font` no longer to use.
+--            change default font to `Cascadia Code`.
 
 local wezterm = require("wezterm");
 local dracula = require('dracula');
@@ -35,7 +37,7 @@ local config = {
     },
 
     -- font = wezterm.font(''),
-    font = wezterm.font_with_fallback({"CaskaydiaCove Nerd Font", "Cascadia Code", "Fira Code"}),
+    font = wezterm.font_with_fallback({"Cascadia Code", "Fira Code"}),
     font_size = 14.0,
 
     default_prog = {'pwsh'},
@@ -151,6 +153,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 
             -- For English Users, the default line:
             -- local distro = line:gsub(" %(Default%)", "")
+            
             -- For Chinese User,
             local distro = line:gsub(" %(默认%)", "")
 
